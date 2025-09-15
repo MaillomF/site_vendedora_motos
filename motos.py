@@ -8,12 +8,15 @@ from babel.numbers import format_currency
 
 
 
+
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 motos_db = os.path.join(BASE_DIR, "motos.db")
 consorcios_db = os.path.join(BASE_DIR, "consorcios.db")
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
+
 
 app.secret_key = '182015'
 UPLOAD_FOLDER = 'static/consorcios'
@@ -496,3 +499,4 @@ def excluir_consorcio(id):
 if __name__ == '__main__':
     init_consorcios_db()
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+
