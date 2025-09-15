@@ -1,0 +1,78 @@
+.botao-projetos{
+     background-color: rgb(155, 150, 150); /* Azul escuro */
+  color: black; /* Cor do texto */
+  padding: 10px 220px; /* Adiciona preenchimento (altura e largura) */
+  border: none; /* Remove a borda padrão */
+  cursor: pointer; /* Altera o cursor ao passar o mouse */
+  border-radius: 20px; /* Arredonda os cantos (opcional) */
+  font-size: 16px; /* Tamanho da fonte (opcional) */
+  width: 80%; /* Largura total do botão */
+  display: inline-block; /* Permite que o botão se comporte como um bloco */
+}
+
+.botao-projetos:hover {
+  background-color: black; /* Azul mais escuro ao passar o mouse */
+  color: white; /* Cor do texto ao passar o mouse */
+  transition: background-color 0.3s ease; /* Transição suave */
+}
+
+img{
+  width: 60px;
+  height: 60px; /* Mantém a proporção da imagem */
+  object-fit: cover; /* Cobre o espaço do contêiner sem distorcer a imagem */
+  border-radius: 500%; /* Arredonda a imagem para um formato circular */
+  margin: 0 auto; /* Centraliza a imagem horizontalmente */
+  display: block; /* Garante que a imagem seja tratada como um bloco */
+  margin-bottom: 20px; /* Espaçamento inferior */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona sombra para profundidade */
+  padding: 0%;
+  border: 2px solid rgb(108, 109, 109); /* Borda azul ao redor da imagem */
+  transition: transform 0.3s ease; /* Transição suave para o efeito de zoom */
+  
+
+}
+
+
+img:hover {
+  transform: scale(1.5); /* Efeito de zoom ao passar o mouse */
+}
+
+
+
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  margin: -35px 0 20px 0; /* Margem superior negativa para ajustar o espaçamento */
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  /* Botões: reduzir padding e ajustar fonte */
+  .botao-projetos {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Imagens das marcas: alinhar em linhas de 3 */
+  .containers .col-md-1 {
+    flex: 0 0 33.3333%;
+    max-width: 13%;
+    margin-bottom: 20px;
+  }
+
+  /* Centralizar imagens */
+  .containers .img-fluid {
+    margin: 0 auto;
+    display: block;
+  }
+}

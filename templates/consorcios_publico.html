@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Consórcios disponíveis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body {
+            background-color: white;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 12px;
+            background-color: rgb(14, 51, 165);
+        }
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background-color: rgb(14, 51, 165);
+        }
+        .card-img-top {
+            height: 350px;
+            object-fit: contain;
+            background-color:rgb(14, 51, 165);
+            padding: 10px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .card-img-top:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background-color: rgb(14, 51, 165);
+        }
+        
+        
+        .btn-saiba-mais {
+            background-color:black;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+        .btn-saiba-mais:hover {
+            background-color: #003d80;
+        }
+        h1 {
+            font-weight: bold;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center mb-5 animate__animated animate__fadeInUp" style="color:   rgb(14, 51, 165);">Consórcio: quem compra, conquista.</h1>
+        <div class="row g-4">
+            {% for item in consorcios %}
+            <div class="col-md-4 col-sm-6">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='consorcios/' ~ item.imagem_principal) }}" alt="Imagem do consórcio" class="card-img-top">
+                    <div class="card-body d-flex flex-column">
+                        <p class="card-text" style="color: black;">{{ item.descricao }}</p>
+                        <div class="mt-auto">
+                            <a href="https://wa.me/5548996527662?text={{ 'Olá! Tenho interesse em saber mais sobre o consórcio ' | urlencode }}" 
+                              target="_blank" 
+                              class="btn btn-saiba-mais w-100">
+                              Fale no WhatsApp
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <h1 class=" text-center mb-5 animate__animated animate__fadeInUp"  style="color:   rgb(14, 51, 165);">ENQUANTO VOCÊ ESTÁ PENSANDO TEM GENTE CONTEMPLANDO!</h1>
+
+   
+</body>
+</html>

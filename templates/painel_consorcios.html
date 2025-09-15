@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Painel de Consórcios</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <h1 class="mb-4">Painel de gerenciamento de consórcios</h1>
+        <form method="POST" action="/upload-consorcio" enctype="multipart/form-data">
+            <input type="text" name="descricao" placeholder="Descrição" required class="form-control mb-2">
+            <input type="file" name="imagens" multiple required class="form-control mb-2">
+            <button type="submit" class="btn btn-success">Cadastrar consórcio</button>
+        </form>
+
+        <div class="row">
+            {% for item in consorcios %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="{{ url_for('static', filename='consorcios/' ~ item.imagem_principal) }}" alt="Imagem do consórcio" class="card-img-top">
+                        <div class="card-body">
+                        <p class="card-text">{{ item.descricao }}</p>
+                        <a href="{{ url_for('excluir_consorcio', id=item.id) }}" class="btn btn-danger">Excluir</a>
+                        <a href="/editar-consorcio/{{ item.id }}" class="btn btn-warning btn-sm">Editar</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+<a href="/logout">Sair</a>
