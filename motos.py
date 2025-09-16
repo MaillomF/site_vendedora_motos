@@ -494,12 +494,15 @@ def excluir_consorcio(id):
     return redirect(url_for('painel_consorcios'))
 
 
-
+@app.route('/teste')
+def teste():
+    return "<h1>Funcionando no Replit!</h1>"
 
 
 if __name__ == '__main__':
     init_consorcios_db()
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+
 
 
 
