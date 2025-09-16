@@ -1,0 +1,8 @@
+{
+  "startCommand": "python app.py",
+  "services": {
+    "web": {
+      "port": 5000
+    }
+  }
+}
