@@ -60,7 +60,7 @@ def painel():
     if 'usuario' not in session:
         return redirect('/login')
 
-    conn = sqlite3.connect('motos_db')
+    conn = sqlite3.connect(motos_db)
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM motos")
     motos = cursor.fetchall()
@@ -73,7 +73,7 @@ def painel_consorcios():
     if 'usuario' not in session:
         return redirect('/login')
 
-    conn = sqlite3.connect('consorcios_db')
+    conn = sqlite3.connect(consorcios_db)
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM consorcios")
     consorcios_raw = cursor.fetchall()
@@ -94,7 +94,7 @@ def painel_consorcios():
 
 # Cria o banco e a tabela se não existir
 def init_db():
-    conn = sqlite3.connect('motos_db')
+    conn = sqlite3.connect(motos_db)
     cursor = conn.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS motos (
@@ -115,7 +115,7 @@ init_db()
 
 
 def init_consorcios_db():
-    conn = sqlite3.connect('consorcios_db')
+    conn = sqlite3.connect(consorcios_db)
     cursor = conn.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS consorcios (
@@ -255,7 +255,7 @@ def cadastro():
 
     imagens_str = ';'.join(nomes_imagens)
 
-    conn = sqlite3.connect('motos_db')
+    conn = sqlite3.connect(motos_db)
     cursor = conn.cursor()
     cursor.execute("""
         INSERT INTO motos (modelo, marca, ano, valor, descricao, imagem)
@@ -268,7 +268,7 @@ def cadastro():
 
 @app.route('/excluir/<int:id>')
 def excluir(id):
-    conn = sqlite3.connect('motos_db')
+    conn = sqlite3.connect(motos_db)
     cursor = conn.cursor()
     cursor.execute("DELETE FROM motos WHERE id=?", (id,))
     conn.commit()
@@ -283,7 +283,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/editar/<int:id>', methods=['GET', 'POST'])
 def editar(id):
-    conn = sqlite3.connect('motos_db')
+    conn = sqlite3.connect(motos_db)
     cursor = conn.cursor()
 
     if request.method == 'POST':
@@ -330,7 +330,7 @@ def remover_imagem(id):
     if not imagem_remover:
         return redirect(f'/editar/{id}')
 
-    conn = sqlite3.connect('motos_db')
+    conn = sqlite3.connect(motos_db)
     cursor = conn.cursor()
 
     # Buscar imagens atuais
@@ -358,7 +358,7 @@ def remover_imagem(id):
 
 @app.route('/consorcios')
 def consorcios_publico():
-    conn = sqlite3.connect('consorcios_db')
+    conn = sqlite3.connect(consorcios_db)
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM consorcios")
     consorcios_raw = cursor.fetchall()
@@ -388,7 +388,7 @@ def upload_consorcio():
     if not imagens or imagens[0].filename == '':
         return "Erro: pelo menos uma imagem é obrigatória", 400
 
-    conn = sqlite3.connect('consorcios_db')
+    conn = sqlite3.connect(consorcios_db)
     cursor = conn.cursor()
 
     # Salvar imagem principal
@@ -410,7 +410,7 @@ def upload_consorcio():
 
 @app.route('/editar-consorcio/<int:id>')
 def editar_consorcio(id):
-    conn = sqlite3.connect('consorcios_db')
+    conn = sqlite3.connect(consorcios_db)
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM consorcios WHERE id = ?", (id,))
     consorcio_raw = cursor.fetchone()
@@ -430,7 +430,7 @@ def salvar_edicao_consorcio(id):
     nova_descricao = request.form['descricao']
     novas_imagens = request.files.getlist('novas_imagens')
 
-    conn = sqlite3.connect('consorcios_db')
+    conn = sqlite3.connect(consorcios_db)
     cursor = conn.cursor()
 
     cursor.execute("UPDATE consorcios SET descricao = ? WHERE id = ?", (nova_descricao, id))
@@ -453,7 +453,7 @@ def salvar_edicao_consorcio(id):
 
 @app.route('/excluir-imagem/<int:id>', methods=['POST'])
 def excluir_imagem(id):
-    conn = sqlite3.connect('consorcios_db')
+    conn = sqlite3.connect(consorcios_db)
     cursor = conn.cursor()
 
     cursor.execute("SELECT nome_arquivo, consorcio_id FROM imagens_consorcio WHERE id = ?", (id,))
@@ -474,7 +474,7 @@ def excluir_consorcio(id):
     if 'usuario' not in session:
         return redirect(url_for('login', next='painel-consorcios'))
 
-    conn = sqlite3.connect('consorcios_db')
+    conn = sqlite3.connect(consorcios_db)
     cursor = conn.cursor()
 
     # Buscar imagens associadas
@@ -500,6 +500,7 @@ def excluir_consorcio(id):
 if __name__ == '__main__':
     init_consorcios_db()
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+
 
 
 
