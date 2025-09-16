@@ -1,1 +1,1 @@
-web: python motos.py
+web: python app.py
